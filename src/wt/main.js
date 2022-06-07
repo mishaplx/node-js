@@ -2,8 +2,10 @@
 import os from 'os'
 import  { Worker, workerData } from 'worker_threads'
 import path from 'path'
-
+import {fileURLToPath} from 'url';
 export const performCalculations = async () => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
     console.log('i am Main.js');
      const cpu = os.cpus()
     const arr =[]
@@ -11,7 +13,7 @@ export const performCalculations = async () => {
         arr.push(
             new Promise((resolve, rejects)=>{
                 
-                    new Worker(path.join(path.resolve(),'worker.js') ,{
+                    new Worker(path.join(__dirname,'worker.js') ,{
                         workerData: 10 + i
                      }).on('message',data=>{
                       resolve(data)

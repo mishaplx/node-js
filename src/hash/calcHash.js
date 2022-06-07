@@ -5,7 +5,7 @@ const {  createHash } = await import('crypto');
 const __dirname = path.resolve()
 export const calculateHash = async () => {
   const hash = createHash('sha256');
-  const input = createReadStream(path.join(__dirname, 'files', 'fileToCalculateHashFor.txt'));
+  const input = createReadStream(path.join(__dirname,"src", "hash", 'files', 'fileToCalculateHashFor.txt'));
   input.on('readable', () => {
     const data = input.read();
     if (data)

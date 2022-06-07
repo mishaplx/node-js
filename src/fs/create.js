@@ -6,9 +6,9 @@ export const create = async () => {
     console.log(path.join(__dirname, 'files'));
     //Write your code here 
     const content = 'I am fresh and young';
-    fs.access(path.join(__dirname, 'files', 'fresh.txt'), fs.F_OK, (err) => {
+    fs.access(path.join(__dirname,"src", "fs", 'files', 'fresh.txt'), fs.F_OK, (err) => {
         if (err) {
-            fs.writeFile(path.join(__dirname, 'files','fresh.txt'), content, (err)=>{
+            fs.writeFile(path.join(__dirname,"src", "fs", 'files','fresh.txt'), content, (err)=>{
                 if(err){
                     console.log(new Error(err));
                 }
