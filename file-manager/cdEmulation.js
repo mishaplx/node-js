@@ -1,8 +1,20 @@
 import currentPath from './currentPath.js';
-export default function cdEmulation(input){
+import getHomeDir from './getHomeDir.js';
+import fs from "fs"
+export default function cdEmulation(dir,input){
+
   const newp = input.split(' ')
-  console.log(typeof newp);
-   const path = process.env.USERPROFILE + newp[1]
-   console.log("\x1b[35m",path);
-   currentPath(path)
+  if(dir == null){
+    const path = getHomeDir() + newp[1]
+    console.log("\x1b[35m",path);
+    currentPath(path)
+    return path
+  }
+  else{
+    const path = dir + newp[1]
+    console.log("\x1b[35m",path);
+    currentPath(path)
+    return path
+  }
+ 
 }
