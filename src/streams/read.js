@@ -6,3 +6,4 @@ export const read = async () => {
     const readStream = fs.createReadStream(path.join(__dirname, 'files', 'fileToRead.txt'))
     readStream.pipe(stdout)
 };
+read()
