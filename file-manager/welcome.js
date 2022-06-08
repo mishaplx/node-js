@@ -15,6 +15,8 @@ import moveEmulation from './Basic-operations/move.js';
 import deleteEmulation from './Basic-operations/delete.js';
 import osEOL from './os/osEOL.js'
 import hash from './hash/hash.js';
+import compress from './compress/compress.js';
+import decompress from './compress/decompress.js';
 export default function Welcome(args){
   const rl = readline.createInterface({ input, output });
 
@@ -75,6 +77,15 @@ export default function Welcome(args){
       let x = hash(startDir, input)
       startDir = x
      }
+     else if (inputInclude[0].includes('decompress')){
+      let x = decompress(startDir, input)
+      startDir = x
+     }
+     else if (inputInclude[0].includes('compress')){
+      let x = compress(startDir, input)
+      startDir = x
+     }
+     
      else{
        invalid()
      }
