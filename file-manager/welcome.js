@@ -4,38 +4,80 @@ import closeApp from './closeApp.js'
 import currentPath from './currentPath.js';
 import emulatorLs from './lsEmulator.js';
 import cdEmulation from './cdEmulation.js';
-import oldPath from './oldPath.js';
 import invalid from './invalid.js';
 import getHomeDir from './getHomeDir.js';
+import upDir from './upDir.js';
+import catEmulation from './Basic-operations/cat.js';
+import addEmulation from './Basic-operations/add.js';
+import renameEmulation from './Basic-operations/rename.js';
+import copyEmulation from './Basic-operations/copy.js';
+import moveEmulation from './Basic-operations/move.js';
+import deleteEmulation from './Basic-operations/delete.js';
+import osEOL from './os/osEOL.js'
+import hash from './hash/hash.js';
 export default function Welcome(args){
   const rl = readline.createInterface({ input, output });
-  let dir = null;
-  let flag = true;
+
+  let startDir = null;
     let name = args.slice(args.length - 1).join('').split('--username=')
     const userName = name[1]
     rl.output.write(`Welcome to the File Manager, ${userName}!` + '\n');
     currentPath(getHomeDir(),'')
+    startDir = getHomeDir()
    rl.on('line', (input)=>{
-     if(input.includes('.exit')){
+     let inputInclude = input.split(' ')
+     if(inputInclude[0].includes('.exit')){
        closeApp(userName) 
      }
-    else if(input.includes('ls')){
-      emulatorLs(dir)
+    else if(inputInclude[0].includes('ls')){
+      console.log(startDir,' ------ls');
+      process.chdir(startDir)
+      startDir = process.cwd()
+      emulatorLs(startDir)
      }
-     else if(input.includes('cd')){
-       if(flag){
-
-         dir = cdEmulation(dir,input)
-         flag = false
-       }
-       else{
-        cdEmulation(dir,input)
-       }
+     else if(inputInclude[0].includes('cd')){
+        let x = cdEmulation(startDir,input)
+        startDir = x
+     }
+     else if (inputInclude[0].includes('up')){
+          let x = upDir(startDir)
+          startDir = x
+     }
+     else if (inputInclude[0].includes('cat')){
+      let x = catEmulation(startDir, input)
+      startDir = x
+     } 
+     else if (inputInclude[0].includes('add')){
+      let x = addEmulation(startDir, input)
+      startDir = x
+     }
+     else if (inputInclude[0].includes('rn')){
+      let x = renameEmulation(startDir, input)
+      startDir = x
+     }
+     else if (inputInclude[0].includes('copy')){
+      let x = copyEmulation(startDir, input)
+      startDir = x
+     }
+     else if (inputInclude[0].includes('mv')){
+      let x = moveEmulation(startDir, input)
+      startDir = x
+     }
+     else if (inputInclude[0].includes('rm')){
+      let x = deleteEmulation(startDir, input)
+      startDir = x
+     }
+     else if (inputInclude[0].includes('os')){
+      let x = osEOL(startDir, input)
+      startDir = x
+     }
+     else if (inputInclude[0].includes('hash')){
+      let x = hash(startDir, input)
+      startDir = x
      }
      else{
        invalid()
      }
-
    })
    rl.on('close',()=>{
      output.write(`Thank you for using File Manager ${userName}`)
