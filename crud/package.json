@@ -4,8 +4,10 @@
   "description": "This repository is the part of nodejs-assignments https://github.com/AlreadyBored/nodejs-assignments",
   "type": "module",
   "scripts": {
-    "start:dev": "nodemon index.js",
-    "start:prod": "nodemon index.js",
+    "start:dev": "nodemon app.js",
+    "start:prod": "webpack --mode=production --start",
+    "start": "node app.js",
+    "start:multi": "node ./cluster/cluster.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,8 +26,14 @@
   },
   "homepage": "https://github.com/AlreadyBored/node-nodejs-basics#readme",
   "dependencies": {
+    "cluster": "^0.7.7",
     "dotenv": "^16.0.1",
     "nodemon": "^2.0.16",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "webpack": "^5.73.0"
+  },
+  "devDependencies": {
+    "eslint-loader": "^4.0.2",
+    "webpack-cli": "^4.9.2"
   }
 }
