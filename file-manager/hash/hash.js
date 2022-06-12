@@ -1,5 +1,6 @@
 import {  createReadStream} from 'fs';
 import path from 'path';
+import currentPath from '../currentPath.js';
 const {  createHash } = await import('crypto');
 export default function hash(startDir, input){
   const fileToHash = input.split(' ')[1]
@@ -10,9 +11,10 @@ export default function hash(startDir, input){
     if (data)
       hash.update(data);
     else {
-      console.log(`${hash.digest('hex')} ---- ${fileToHash}`);
-      return hash.digest('hex')
+      console.log(`${hash.digest('hex')} ${path.join(startDir, fileToHash)} \n`);
+      currentPath(startDir)
     }
   });
+ 
   return startDir
 }

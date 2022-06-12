@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { stdout } from 'process';
+
 import path from 'path';
 export default function copyEmulation(startDir,input){
   const newp = input.split(' ')

@@ -2,6 +2,7 @@ import zlib from 'zlib'
 import fs from 'fs'
 import path from 'path'
 import { stdout } from 'process'
+import currentPath from '../cdEmulation.js'
 export default function decompress(startDir, input){
   const fileToCompress = input.split(' ')[1]
   const fileToDecompres = fileToCompress.split('.')[0] + '.' + fileToCompress.split('.')[1]
@@ -14,6 +15,7 @@ export default function decompress(startDir, input){
  
    stream.on('finish', () => {
      console.log('Done compressing decompress');
+     currentPath(startDir)
    });
   return startDir
 }

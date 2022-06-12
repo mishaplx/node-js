@@ -2,7 +2,7 @@
 import zlib from 'zlib'
 import fs from 'fs'
 import path from 'path'
-
+import currentPath from '../cdEmulation.js'
 export default function compress(startDir, input){
   const fileToCompress = input.split(' ')[1]
   const brotli = zlib.createBrotliCompress();
@@ -14,5 +14,6 @@ export default function compress(startDir, input){
   stream.on('finish', () => {
     console.log('Done compressing');
   });
+  currentPath(startDir)
   return startDir
 }

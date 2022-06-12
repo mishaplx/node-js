@@ -57,7 +57,7 @@ export default function Welcome(args){
       let x = renameEmulation(startDir, input)
       startDir = x
      }
-     else if (inputInclude[0].includes('copy')){
+     else if (inputInclude[0].includes('cp')){
       let x = copyEmulation(startDir, input)
       startDir = x
      }
