@@ -1,6 +1,6 @@
 # dependencies
 /node_modules
-
+/front-remote-control/node_modules
 # System Files
 .DS_Store
 Thumbs.db
