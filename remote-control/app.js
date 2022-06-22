@@ -2,7 +2,14 @@ import { WebSocketServer } from 'ws';
 import mousePos from './NavigationMouse/mousePos.js';
 import  mouseNavigation  from './NavigationMouse/mouse.js'
 import rectungle from './NavigationMouse/rectungle.js';
+import Jimp from 'jimp'
+import robot from 'robotjs'
 import screen from './screen.js'
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+import fs from 'fs'
 const PORT = 8080;
 const wss = new WebSocketServer({port: 8080});
 
@@ -14,8 +21,10 @@ function onConnection(ws){
     const param = arrMessage[0];
     const value = arrMessage[1];
     if(param == "mouse_position"){
+     
       mousePos()
       let res = mousePos(param)
+      console.log(res);
       ws.send(JSON.stringify(res))
        
     }
@@ -44,9 +53,40 @@ function onConnection(ws){
       rectungle(param, wigth, length)
     }
     if(param == 'prnt_scrn'){
-      let scrn = screen()
-      //ws.send(scrn)
-      //ws.send(scrn.image)
+    //  screen()
+     let size = 100;
+     
+     const img = robot.screen.capture(mousePos().x, mousePos().y, size, size).image;
+     new Jimp({data: img, width:size, height:size},async (err, image) => {
+      if (fs.existsSync(__dirname + '/image.png')){
+        fs.unlinkSync(__dirname + '/image.png')
+       await image.write('image.png');
+        console.log('yes');
+        fs.readFile(__dirname + '\\image.png', function(err, buf) {
+          if(err)console.log(err);
+             let x = buf.toString('base64')
+             ws.send(`prnt_scrn ${x}`)
+             fs.unlinkSync(__dirname + '/image.png')
+            });
+      }else{
+console.log('no');
+        await image.write('image.png');
+        fs.readFile(__dirname + '\\image.png', function(err, buf) {
+          if(err)console.log(err);
+             let x = buf.toString('base64')
+             ws.send(`prnt_scrn ${x}`)
+             fs.unlinkSync(__dirname + '/image.png')
+            });
+      }
+      
+      //console.log(__dirname + '\\image.png','----path');
+      
+      
+        
+          
+       //image.write('fileName.png');
+     });
+    // fs.unlinkSync(__dirname + '/image.png')
     }
    
   });
