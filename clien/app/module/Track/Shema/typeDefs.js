@@ -21,10 +21,10 @@ input inputTrack {
   released: Int
   genresIds: [String]
 }
-type Query {
-  createTrack(input: inputTrack): Track
-  deleteTrack(input: inputTrack): Track
-}
+ type Query {
+   createTrack(id: ID): Track
+   #deleteTrack(input: inputTrack): Track
+ }
 
 
 `

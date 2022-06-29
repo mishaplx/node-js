@@ -1,7 +1,8 @@
 const resolversTrack = {
   Query : {
-    getAllTrack: ()=>{
-      return 
+    createTrack: (id)=>{
+      let x = {id:'123'}
+      return x
     }
   },
 

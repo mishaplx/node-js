@@ -3,18 +3,18 @@ import { gql } from "apollo-server-express"
 const typeDefsBand = gql`
 
 interface Band {
-    _id: string;
-    name: string;
-    origin: string;
-    membersId: Member[];
-    website: string;
-    genresIds: string[];
+    _id: String
+    name: String
+    origin: String
+    membersId:String
+    website: String
+    genresIds: [String]
 }
 type Band {
     id: ID!
     name: String
     origin: String
-    members: [Member]
+    members: String
     website: String
     genres: String
 }
@@ -23,7 +23,7 @@ input inputBand {
     id: ID!
     name: String
     origin: String
-    members: [Member]
+    members: String
     website: String
     genres: String
 }

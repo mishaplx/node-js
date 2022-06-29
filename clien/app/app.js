@@ -11,18 +11,18 @@ import { typeDefsFavourites } from "./module/Favorite/Shema/typeDefs.js";
 
 import {resolversTrack} from './module/Track/Shema/resolvers.js'
 import { resolversUser } from './module/User/Shema/resolvers.js'
+import { resolversArtist } from "./module/Artist/Shema/resolvers.js";
 import http from "http"
-const typeDefs = [typeDefsTrack, typeDefsUser, typeDefsBand, typeDefsGenre, typeDefsArtist, typeDefsFavourites]
-const resolvers = [resolversTrack,resolversUser]
-const schema = makeExecutableSchema({
+///const typeDefs = [typeDefsTrack, typeDefsUser, typeDefsBand, typeDefsGenre, typeDefsArtist, typeDefsFavourites]
+const typeDefs = [typeDefsArtist]
+const resolvers = [resolversArtist]
+const schema = makeExecutableSchema({ 
   typeDefs,
   resolvers,
 });
 
 const app = express();
- typeDefs.typeDefsTrack
-console.log(typeDefs.typeDefsTrack);
-process.exit()
+
 let apolloServer = null;
 async function startServer() {
   apolloServer = new ApolloServer({
@@ -34,10 +34,6 @@ async function startServer() {
 
 startServer();
 const httpserver = http.createServer(app);
-
-app.get("/rest", function (req, res) {
-    res.json({ data: "api working" });
-});
 
 app.listen(4000, function () {
     console.log(`server running on port 4000`);

@@ -26,14 +26,10 @@ input inputArtist {
     instruments: String
 }
 type Query {
-  createArtist(input: inputArtist): Artist
-  deleteArtist(input: inputArtist): Artist
-}
+  createArtist: [Artist]!
+  }
 
 
 `
 
 export { typeDefsArtist }
-// type Mutation {
-//   updateArtist(message: String): String
-// }
