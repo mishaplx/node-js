@@ -3,7 +3,7 @@ import { gql } from "apollo-server-express"
 const typeDefsArtist = gql`
 
 type Artist {
-    id: ID!
+    _id: ID!
     firstName: String
     secondName: String
     middleName: String
@@ -13,22 +13,27 @@ type Artist {
     bands: [ID]
     instruments: String
 }
-
+type deleteArtist {
+  acknowledged: Boolean
+  deletedCount: Int
+}
 input inputArtist {
-    id: ID!
-    firstName: String
-    secondName: String
-    middleName: String
-    birthDate: String
-    birthPlace: String
+    name: String
+    description:String
     country: String
-    bands: [ID]
-    instruments: String
+    year: String
+    firstName: String
+    secondName:String
 }
 type Query {
-  createArtist: [Artist]!
+  artist(id:ID): Artist
+  artists:[Artist!]!
   }
-
+type Mutation {
+  createArtist(input: inputArtist): Artist
+  deleteArtist(id:ID): deleteArtist
+  updateArtist(id:ID):Artist
+}
 
 `
 
