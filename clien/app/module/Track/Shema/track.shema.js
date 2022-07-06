@@ -4,8 +4,9 @@ const typeDefsTrack = gql`
 
 type Track {
   id: ID!
-  title: String
-  albums: String
+  title: String!
+  album: Album
+  artists: [Artist]
   bands: [Band]
   duration: Int
   released: Int
@@ -22,7 +23,8 @@ input inputTrack {
   genresIds: [String]
 }
  type Query {
-   createTrack(id: ID): Track
+   track(id: ID): Track
+   tracks(id: ID): [Track!]!
    #deleteTrack(input: inputTrack): Track
  }
 

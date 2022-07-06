@@ -1,11 +1,11 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 
-export class ArtistAPI extends RESTDataSource {
+export class AlbumAPI extends RESTDataSource {
   constructor() {
     // Always call super()
     super();
     // Sets the base URL for the REST API
-    this.baseURL = 'http://localhost:3002/v1/artists/';
+    this.baseURL = 'http://localhost:3005/v1/albums';
     
   }
   willSendRequest(request) {
@@ -13,7 +13,6 @@ export class ArtistAPI extends RESTDataSource {
   }
   async getById(id) {
     const data = await this.get(id);
-    
     return data
   }
   async getByAll(__) {
@@ -21,23 +20,20 @@ export class ArtistAPI extends RESTDataSource {
    
     return data
   }
-  async createArtist({name,  description, country,year,firstName,secondName}) {
+   async createAlbumService({name, released}) {
 
     const data = await this.post('',{
        name, 
-       description, 
-       country,
-       year,
-       firstName,
-       secondName
+       released
     });
   
-    return data
-  }
-  async deleteArtist(id){
-    const data = await this.delete(`/${id}`)
-    return data
-  }
+     return data
+   }
+   async deleteAlbumService(id){
+     console.log(id);
+     const data = await this.delete(`/${id}`)
+     return data
+   }
   
 }
 

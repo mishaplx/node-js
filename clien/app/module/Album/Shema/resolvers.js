@@ -1,13 +1,29 @@
-const resolvers = {
+const resolversAlbum = {
   Query : {
-    createAlbum: ()=>{
-      return 
+    album: async (_,{id},
+      {dataSources})=> {
+      
+        console.log(id); 
+      let data = await dataSources.AlbumAPI.getById(id)
+      return  data
     },
-
+    albums: async(_,__,
+      {dataSources})=> {
+        let data = await dataSources.AlbumAPI.getByAll(__)
+      return  data.items
+    },
   },
-  deleteAlbum: ()=>{
-      return 
+  Mutation:{
+    createAlbumService: async (_, {input},{dataSources})=>{
+      const data = await dataSources.AlbumAPI.createGenreService(input)
+      return data
     },
+    deleteAlbumService:  async (_, {id},{dataSources})=>{
+      const data = await dataSources.AlbumAPI.deleteGenreService(id)
+      return data
+    },
+  }
+
 }
 
-module.exports = { resolvers }
+export { resolversAlbum }
