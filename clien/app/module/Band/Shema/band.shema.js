@@ -17,7 +17,7 @@ input inputBand {
 }
 type Query {
   band(input: inputBand): Band
-  bands: [Band!]!
+  bands(limit: Int): [Band!]!
 }
 
 type deleteBand {

@@ -14,23 +14,29 @@ type Track {
 }
 
 input inputTrack {
-  _id: String!
-  title: String  
+
+  title: String! 
   albumId: String
+  artistsIds:[String]
   bandsIds: [String]
   duration: Int
   released: Int
   genresIds: [String]
 }
+type deleteTrack {
+  acknowledged: Boolean
+  deletedCount: Int
+}
  type Query {
    track(id: ID): Track
-   tracks(id: ID): [Track!]!
+   tracks(limit: Int): [Track!]!
  }
-
+  type Mutation {
+    createTrack(input: inputTrack): Track
+    deleteTrack(id: ID): deleteTrack
+    updateTrack(id:ID): Track
+ }
 
 `
 
 export { typeDefsTrack }
-// type Mutation {
-//   updateTrack(message: String): String
-// }

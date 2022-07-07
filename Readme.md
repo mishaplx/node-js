@@ -1,0 +1,3 @@
+-npm i
+-dev - npm run start:dev - start nodemon app.js
+-prod - npm run start:prod - start node app.js

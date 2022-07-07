@@ -14,11 +14,11 @@ const resolversAlbum = {
     },
   },
   Mutation:{
-    createAlbumService: async (_, {input},{dataSources})=>{
+    createAlbum: async (_, {input},{dataSources})=>{
       const data = await dataSources.AlbumAPI.createGenreService(input)
       return data
     },
-    deleteAlbumService:  async (_, {id},{dataSources})=>{
+    deleteAlbum:  async (_, {id},{dataSources})=>{
       const data = await dataSources.AlbumAPI.deleteGenreService(id)
       return data
     },

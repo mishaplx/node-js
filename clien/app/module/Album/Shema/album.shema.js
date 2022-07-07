@@ -25,12 +25,12 @@ type Album {
 # }
 type Query {
   album(id: ID): Album
-  albums:[Album]
+  albums(limit: Int):[Album]
 }
 
  type Mutation {
-  createAlbumService(message: String): String
-  deleteAlbumService(message: String): String
+  createAlbum(message: String): String
+  deleteAlbum(message: String): String
  }
 `
 

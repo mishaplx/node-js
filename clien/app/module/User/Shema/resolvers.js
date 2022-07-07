@@ -11,7 +11,7 @@ const resolversUser = {
        }
    },
   Query:{
-     login: async (_,
+     jwt: async (_,
        { email, password},
        {dataSources})=> {
          let response = await  dataSources.UserAPI.getJwt(email, password)

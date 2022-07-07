@@ -24,7 +24,7 @@ type deleteGenre {
 }
 type Query {
   genre(id:ID):Genre
-  genres:[Genre!]!
+  genres(limit: Int):[Genre!]!
 }
 
  type Mutation {

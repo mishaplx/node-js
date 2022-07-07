@@ -27,7 +27,7 @@ input inputArtist {
 }
 type Query {
   artist(id:ID): Artist
-  artists:[Artist!]!
+  artists(limit: Int):[Artist!]!
   }
 type Mutation {
   createArtist(input: inputArtist): Artist

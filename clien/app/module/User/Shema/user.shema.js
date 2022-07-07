@@ -19,7 +19,7 @@ type User {
  }
 
 type  Query {
-  login(email: String!, password: String!): Test
+  jwt(email: String!, password: String!): Test
   user(id:ID!): User
 }
 
