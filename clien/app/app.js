@@ -23,10 +23,11 @@ import { ArtistAPI } from "./module/Artist/services/services.artist.js";
 import { GenreAPI } from "./module/Genre/services/services.genre.js";
 import { BandAPI } from "./module/Band/services/services.band.js"
 import { AlbumAPI } from "./module/Album/services/services.album.js"
+import { TrackAPI } from "./module/Track/services/services.track.js"
  
 ///const typeDefs = [typeDefsTrack, typeDefsUser, typeDefsBand, typeDefsGenre, typeDefsArtist, typeDefsFavourites]
 const typeDefs = [typeDefsUser, typeDefsArtist, typeDefsGenre,typeDefsBand, typeDefsMembers, typeDefsAlbum, typeDefsTrack]
-const resolvers = [resolversUser, resolversArtist, resolversGenre, resolversBand,resolversAlbum]
+const resolvers = [resolversUser, resolversArtist, resolversGenre, resolversBand,resolversAlbum,resolversTrack]
 const executableSchema = makeExecutableSchema({ 
   typeDefs,
   resolvers,
@@ -43,31 +44,18 @@ const executableSchema = makeExecutableSchema({
         GenreAPI: new GenreAPI(),
         BandAPI: new BandAPI(),
         AlbumAPI: new AlbumAPI(),
-        
+        TrackAPI: new TrackAPI()
     }),
     playground: {
       endpoint:"/graphql"
-    },
+    }, 
     context: ({ req }) => {
-      // Note: This example uses the `req` argument to access headers,
-      // but the arguments received by `context` vary by integration.
-      // This means they vary for Express, Koa, Lambda, etc.
-      //
-      // To find out the correct arguments for a specific integration,
-      // see https://www.apollographql.com/docs/apollo-server/api/apollo-server/#middleware-specific-context-fields
-   
-      // Get the user token from the headers.
       const token = req.headers.authorization || '';
-    
-     
-   
-      // Add the user to the context
       return { token };
     },
   });
  
 
 server.listen(4000).then(({url})=>{
-  
        console.log(` server running on port ${url}`);
 })

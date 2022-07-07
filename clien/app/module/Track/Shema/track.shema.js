@@ -3,7 +3,7 @@ import { gql } from "apollo-server-express"
 const typeDefsTrack = gql`
 
 type Track {
-  id: ID!
+  _id: ID!
   title: String!
   album: Album
   artists: [Artist]
@@ -25,7 +25,6 @@ input inputTrack {
  type Query {
    track(id: ID): Track
    tracks(id: ID): [Track!]!
-   #deleteTrack(input: inputTrack): Track
  }
 
 
