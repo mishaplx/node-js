@@ -1,9 +1,10 @@
 -git clone https://github.com/mishaplx/node-js.git
-cd client/app
-docker-compose up
+in root folder -docker-compose up
+-cd client/app
 -cd node-graphql-service-main
 -npm i
 npm run run:all
+
 -cd client/app
 npm i
 npm run start:prod
