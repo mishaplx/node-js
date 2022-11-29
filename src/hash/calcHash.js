@@ -1,5 +1,4 @@
-import crypto from 'crypto'
-import {  createReadStream} from 'fs';
+import {  createReadStream } from 'fs';
 import path from 'path';
 const {  createHash } = await import('crypto');
 const __dirname = path.resolve()
@@ -12,11 +11,11 @@ export const calculateHash = async () => {
       hash.update(data);
     else {
       console.log(`${hash.digest('hex')} ---- fileToCalculateHashFor.txt`);
-      return hash.digest('hex')
+
     }
   });
 };
 
-calculateHash()
+await calculateHash()
 
 
