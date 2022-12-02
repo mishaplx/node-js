@@ -3,9 +3,6 @@ import { stdin, stdout } from 'node:process';
 
 
 export const transform = async () => {
-    
-
-
 class Reverse extends Transform {
     constructor(options){
 
@@ -16,6 +13,6 @@ class Reverse extends Transform {
         callback()
     }
 }
-stdin.pipe(new Reverse()).pipe(stdout)
+  stdin.pipe(new Reverse()).pipe(stdout)
 };
-transform()
+await transform()

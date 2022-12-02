@@ -1,28 +1,23 @@
-import fs from 'fs'
+import fs from 'fs/promises';
 import path from 'path'
 
-export const create = async () => {
-    const __dirname = path.resolve();
-    console.log(path.join(__dirname, 'files'));
-    //Write your code here 
-    const content = 'I am fresh and young';
-    fs.access(path.join(__dirname,"src", "fs", 'files', 'fresh.txt'), fs.F_OK, (err) => {
-        if (err) {
-            fs.writeFile(path.join(__dirname,"src", "fs", 'files','fresh.txt'), content, (err)=>{
-                if(err){
-                    console.log(new Error(err));
-                }
-                else{
-                    console.log('create');
-                }
-            })
-        }
-        else{
-            console.log(new Error('FS operation failed'));
-        }
-      
-        
-      })
+const content = 'I am fresh and young';
+const fileName = 'fresh.txt';
+const __dirname = path.resolve();
+const pathFile = path.join(__dirname,"src", "fs", 'files', fileName)
 
-};
-create()
+const createFile = async (filename,path)=>{
+  await fs.writeFile(path,content)
+}
+function checkFileExists(file) {
+    return fs.access(file)
+        .then(() =>  console.log(new Error('FS operation failed')))
+        .catch(() => createFile(file,pathFile))
+}
+const main = async ()=>{
+  await checkFileExists(pathFile)
+
+}
+await main()
+
+

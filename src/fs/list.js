@@ -1,26 +1,17 @@
-import fs from 'fs'
+import fs from 'fs/promises';
 import path from 'path'
 export const list = async () => {
-    const __dirname = path.resolve();
-    
-     fs.access(path.join(__dirname, "src", "fs", "files"), fs.F_OK, (err)=>{
-         if(err){
-             console.log(new Error('FS operation failed'));
-         }
-         else{
-             fs.readdir(path.join(__dirname,"src", "fs", "files"), (err,data)=>{
-                 if(err){
-                     console.log(err);
-                 }
-                 else{
-                     for (let i = 0; i < data.length; i++) {
-                         console.log(data[i]);
-                    
-                     }
-                 }
-             })
-         }
-     })
-   
+        const __dirname = path.resolve();
+        const err = new Error('FS operation failed')
+        const pathFile = path.join(__dirname,"src", "fs", "files")
+        try{
+            await fs.access(pathFile)
+            const files = await fs.readdir(pathFile)
+            files.forEach(item=> console.log(item))
+        }
+        catch (e) {
+            console.log(err)
+        }
+
 };
-list()
+ await list()

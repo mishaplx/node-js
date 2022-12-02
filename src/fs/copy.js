@@ -1,37 +1,21 @@
-import fs from 'fs'
+import fs from 'fs/promises';
 import path from 'path'
+
 export const copy = async () => {
     const __dirname = path.resolve();
-    fs.access(path.join(__dirname,"src", "fs", "files"), fs.F_OK, (err) => {
-        if(err){
-          
-            console.log(new Error('FS operation failed'));
+    const err = new Error('FS operation failed')
+    const pathFolder = path.join(__dirname,"src", "fs", "files")
+    try {
+     await fs.access(pathFolder)
+     await fs.mkdir(path.join(__dirname,"src", "fs","files_copy"))
+       const data = await fs.readdir(path.join(__dirname,"src", "fs", "files"))
+        for (let i = 0; i < data.length; i++) {
+           const readData =  await fs.readFile(path.join(__dirname,"src", "fs", "files", data[i]))
+           await fs.writeFile(path.join(__dirname,"src", "fs", "files_copy", data[i]),readData)
         }
-        else{
-            fs.access(path.join(__dirname,"src", "fs", "files_copy"), fs.F_OK, (err) => {
-                if(err){
-                    fs.mkdir(path.join(__dirname,"src", "fs", "files_copy"), (err)=>{
-                        if(err){
-                            console.log(err);
-                        }
-                        else{
-                            fs.readdir(path.join(__dirname,"src", "fs", "files"), (err,data)=>{
-                                console.log(data);
-                                for (let i = 0; i < data.length; i++) {
-                                    const ReadSteam = fs.createReadStream(path.join(__dirname,"src", "fs", "files", data[i]))
-                                    const WriteStream = fs.createWriteStream(path.join(__dirname,"src", "fs", "files_copy", data[i]))
-                                    ReadSteam.pipe(WriteStream)
-                                }
-                            })
-                        }
-                    })
-                }
-                else{
-                    console.log(new Error('FS operation failed'));
-                   
-                }
-            })
-        }
-    })
+    }
+    catch (e) {
+        console.log(err);
+    }
 };
-copy()
+await copy()

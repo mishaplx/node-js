@@ -6,7 +6,7 @@
   "scripts": {
     "cli-env":"node ./src/cli/env.js",
     "cli-args":"node ./src/cli/args.js",
-    "cp":"node ./src/cp/args.js",
+    "cp":"node ./src/cp/cp.js",
     "fs-copy":"node ./src/fs/copy.js",
     "fs-create":"node ./src/fs/create.js",
     "fs-delete":"node ./src/fs/delete.js",

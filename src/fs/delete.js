@@ -1,18 +1,16 @@
-import fs from 'fs'
+import fs from 'fs/promises'
 import path from 'path'
 export const remove = async () => {
     const __dirname = path.resolve();
-    fs.access(path.join(__dirname,"src", "fs", "files", 'fileToRemove.txt'), fs.F_OK, (err) => {
-        if(err){
-            console.log(new Error('FS operation failed'));
-        }
-        else{
-            fs.unlink(path.join(__dirname,"src", "fs", "files", 'fileToRemove.txt'),(err)=>{
-                if(err){
-                    console.log(err);
-                }
-            })
-        }
-    })
+    const err = new Error('FS operation failed')
+    const fileName = 'fileToRemove.txt'
+   const pathFile = path.join(__dirname,"src", "fs", "files", fileName)
+    try{
+        await fs.unlink(pathFile)
+
+    }
+    catch  {
+        console.log(err)
+    }
 };
-remove();
+await remove();
