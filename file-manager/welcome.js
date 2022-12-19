@@ -17,22 +17,23 @@ import osEOL from './os/osEOL.js'
 import hash from './hash/hash.js';
 import compress from './compress/compress.js';
 import decompress from './compress/decompress.js';
+
+
 export default function Welcome(args){
   const rl = readline.createInterface({ input, output });
-
   let startDir = null;
-    let name = args.slice(args.length - 1).join('').split('--username=')
-    const userName = name[1]
+    let [first,name] = args.slice(args.length - 1)[0].split('--username=')
+    const userName = name
     rl.output.write(`Welcome to the File Manager, ${userName}!` + '\n');
     currentPath(getHomeDir(),'')
     startDir = getHomeDir()
+
    rl.on('line', (input)=>{
      let inputInclude = input.split(' ')
      if(inputInclude[0].includes('.exit')){
        closeApp(userName) 
      }
     else if(inputInclude[0].includes('ls')){
-      console.log(startDir,' ------ls');
       process.chdir(startDir)
       startDir = process.cwd()
       emulatorLs(startDir)

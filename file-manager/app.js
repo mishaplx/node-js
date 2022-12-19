@@ -1,4 +1,4 @@
 import Welcome from './welcome.js'
-
-Welcome(process.argv)
+const argv = process.argv
+Welcome(argv)
 

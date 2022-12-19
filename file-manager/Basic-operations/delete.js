@@ -17,7 +17,5 @@ fs.stat(path.join(startDir, delFile),(err)=>{
     currentPath(startDir)
   }
 })
-
-
 return startDir
 }
