@@ -19,6 +19,5 @@ export default function osEOL(startDir, input){
     stdout.write(`architecture - ${os.arch()} \n`)
     currentPath(startDir)
   }
- 
   return startDir
 }
