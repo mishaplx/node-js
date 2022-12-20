@@ -1,7 +1,7 @@
 
 import querystring from 'querystring'
 import { v4 as uuidv4 } from 'uuid'; 
-import { users } from '../db.js'
+import { users } from '../db.ts'
 export default function postResponse(request,response){
  let body = ''
            request.on('data',data=>{

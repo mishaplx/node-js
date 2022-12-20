@@ -2,7 +2,7 @@ import cluster from 'node:cluster';
 
 import { cpus } from 'os';
  import process from 'process';
- import createCRUD from '../index.js'
+ import createCRUD from '../index.ts'
  import dotenv from 'dotenv'
 const numCPUs = cpus().length;
  if (cluster.isPrimary) {

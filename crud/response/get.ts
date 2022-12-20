@@ -1,5 +1,5 @@
 import url from 'url'
-import { users } from '../db.js'
+import { users } from '../db.ts'
 export default function getResponse(request,response){
   let urlRequest = url.parse(request.url, true)
   let badRequest = 'userId' in urlRequest.query

@@ -1,5 +1,5 @@
 import url from 'url'
-import { users } from '../db.js'
+import { users } from '../db.ts'
 import querystring from 'querystring'
 export default function putResponse(request,response){
   let body = ''

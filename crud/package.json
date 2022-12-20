@@ -4,7 +4,7 @@
   "description": "This repository is the part of nodejs-assignments https://github.com/AlreadyBored/nodejs-assignments",
   "type": "module",
   "scripts": {
-    "start:dev": "nodemon app.js",
+    "start:dev": "nodemon app.",
     "start:prod": "webpack --mode=production --start",
     "start": "node app.js",
     "start:multi": "node ./cluster/cluster.js",

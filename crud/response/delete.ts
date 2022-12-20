@@ -1,4 +1,4 @@
-import { users } from '../db.js'
+import { users } from '../db.ts'
 import url from 'url'
 export default function deleteResponse(request,response){
   let urlRequest = url.parse(request.url, true)
