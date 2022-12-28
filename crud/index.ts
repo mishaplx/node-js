@@ -1,37 +1,31 @@
-import http from 'http'
-import getResponse from './response/get.js';
-import postResponse from './response/post.js';
-import putResponse from './response/put.js';
-import deleteResponse from './response/delete.js';
-     
- export default function createCRUD(port){
+import * as http from 'http';
+import getResponse from './response/get';
+import postResponse from './response/post';
+import putResponse from './response/put';
+import deleteResponse from './response/delete';
+import { IncomingMessage, ServerResponse } from 'http';
 
-    http.createServer(function(request,response){
-      if (request.url.includes('/api/user')){
-        if (request.method == 'GET'){
-          getResponse(request,response)
+export default function createCRUD(port: string) {
+  http
+    .createServer(function (
+      request: IncomingMessage,
+      response: ServerResponse,
+    ): void {
+      if (request.url.includes('/api/users')) {
+        if (request.method == 'GET') {
+          getResponse(request, response);
+        } else if (request.method == 'POST') {
+          postResponse(request, response);
+        } else if (request.method == 'PUT') {
+          putResponse(request, response);
+        } else if (request.method == 'DELETE') {
+          deleteResponse(request, response);
         }
-         else if(request.method == 'POST'){
-           postResponse(request,response)
-         }
-         else if(request.method == 'PUT'){
-          putResponse(request,response)
-          }
-          else if(request.method == 'DELETE'){
-            deleteResponse(request,response)
-          }
-      }else{
+      } else {
         response.statusCode = 404;
-        response.end('not found')
+        response.end('not found');
       }
-     
-      
-    }).listen(port)
-  }
-
-
-
-
-
-
- 
+    })
+    .listen(port);
+  console.log(`server start ${process.env.PORT}`);
+}

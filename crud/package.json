@@ -1,39 +1,25 @@
 {
-  "name": "node-nodejs-basics",
+  "name": "crud-api",
   "version": "1.0.0",
-  "description": "This repository is the part of nodejs-assignments https://github.com/AlreadyBored/nodejs-assignments",
-  "type": "module",
+  "main": "index.js",
+  "license": "MIT",
   "scripts": {
-    "start:dev": "nodemon app.",
-    "start:prod": "webpack --mode=production --start",
-    "start": "node app.js",
-    "start:multi": "node ./cluster/cluster.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "yarn nodemon app.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlreadyBored/node-nodejs-basics.git"
-  },
-  "keywords": [
-    "nodejs",
-    "assignments",
-    "alreadybored"
-  ],
-  "author": "alreadybored",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AlreadyBored/node-nodejs-basics/issues"
-  },
-  "homepage": "https://github.com/AlreadyBored/node-nodejs-basics#readme",
   "dependencies": {
-    "cluster": "^0.7.7",
-    "dotenv": "^16.0.1",
-    "nodemon": "^2.0.16",
-    "uuid": "^8.3.2",
-    "webpack": "^5.73.0"
+    "@types/node": "^18.11.18",
+    "dotenv": "^16.0.3",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "eslint-loader": "^4.0.2",
-    "webpack-cli": "^4.9.2"
+    "@types/uuid": "^9.0.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^3.4.1"
   }
 }

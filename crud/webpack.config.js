@@ -1,38 +1,30 @@
-import path from 'path'
-//import { createRequire } from 'module';
+import path from 'path';
 import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
- const config = {
-  mode: 'production',
-     entry: './app.js',
-     output: {
-         path: path.join(__dirname, 'dist'),
-         filename: 'bundle.js'
-     },
-     resolve: {
-      fallback: {
-          "fs": false,
-           "url": false ,
-           "querystring": false,
-           "http": false,
-           "os": false,
-           "path": false
-      },
-  },
-     module: {
-      rules: [
-        {
-          test: /\.js$/,
-          enforce: 'pre',
-          exclude: /node_modules/,
-          loader: 'eslint-loader',
-        },
-      ]
+const {
+    NODE_ENV = 'production',
+} = process.env;
+const config = {
+    entry: './app.ts',
+    mode: NODE_ENV,
+    target: 'node',
+    module:{
+        rules:[
+            {
+                test: /\.ts$/,
+                use: [
+                    'ts-loader',
+                ]
+            }
+        ],
+    },
+    output: {
+        path: path.join(__dirname, 'dist'),
+        filename: 'index.js'
+    },
+    resolve: {
+        extensions: ['.ts', '.js'],
     }
- };
+}
 
-
-      
-
-export default config;
+export default config

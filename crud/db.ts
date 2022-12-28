@@ -1,5 +1,13 @@
 import { v4 as uuidv4 } from 'uuid'; 
-export let users = [
+
+export interface userType {
+  id:string,
+  username:string,
+  age:number,
+  hobbies: [string] | []
+}
+
+export const users: userType[] = [
   {
     id: uuidv4(),
     username: 'misha',
