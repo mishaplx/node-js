@@ -1,15 +1,18 @@
 import 'dotenv/config';
 import * as http from 'http';
 
-import postResponse from './response/post';
-import putResponse from './response/put';
-import deleteResponse from './response/delete';
+import postResponse from './controller/post.controller';
+
 import { IncomingMessage, ServerResponse } from 'http';
 import getResponse from './controller/get.controller';
+import putResponse from './controller/put.controller';
+import deleteResponse from './controller/delete.controller';
+import { badRequest } from './service/utils';
 const app = http.createServer(function (
   request: IncomingMessage,
   response: ServerResponse,
 ): void {
+  console.log(request.url.split('/api/users'));
   if (request.url.includes('/api/users')) {
     if (request.method == 'GET') {
       getResponse(request, response);
@@ -21,8 +24,7 @@ const app = http.createServer(function (
       deleteResponse(request, response);
     }
   } else {
-    response.statusCode = 404;
-    response.end('not found');
+    badRequest(request, response, 404, 'Not found');
   }
 });
 

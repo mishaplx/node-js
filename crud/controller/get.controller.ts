@@ -1,22 +1,18 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import * as url from 'url';
 import { getAllusers, getuserById } from '../service/get.service';
+import { UrlWithParsedQuery } from 'url';
 
 export default function getResponse(
   request: IncomingMessage,
   response: ServerResponse,
 ): void {
-  const urlRequest = url.parse(request.url, true);
+  const urlRequest: UrlWithParsedQuery = url.parse(request.url, true);
   const userIdCheck = 'userId' in urlRequest.query;
   if (userIdCheck) {
     return getuserById(request, response, urlRequest);
   }
   if (!userIdCheck) {
-    return getAllusers(request, response, urlRequest);
+    return getAllusers(request, response);
   }
-
-  // response.statusCode = 400;
-  // request.statusMessage = 'Bad request';
-  // response.write('Bad request');
-  // response.end();
 }
