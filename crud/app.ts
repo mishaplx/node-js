@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import * as dotenv from 'dotenv';
 import * as http from 'http';
 
 import postResponse from './controller/post.controller';
@@ -12,7 +12,6 @@ const app = http.createServer(function (
   request: IncomingMessage,
   response: ServerResponse,
 ): void {
-  console.log(request.url.split('/api/users'));
   if (request.url.includes('/api/users')) {
     if (request.method == 'GET') {
       getResponse(request, response);
@@ -28,5 +27,5 @@ const app = http.createServer(function (
   }
 });
 
-app.listen(process.env.PORT);
-console.log(`server start ${process.env.PORT}`);
+app.listen(dotenv.config().parsed.PORT);
+console.log(`server start ${dotenv.config().parsed.PORT}`);

@@ -1,5 +1,3 @@
-import * as querystring from 'querystring';
-
 import { IncomingMessage, ServerResponse } from 'http';
 import { badRequest } from '../service/utils';
 import { addUser } from '../service/post.service';

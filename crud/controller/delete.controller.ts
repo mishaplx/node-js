@@ -1,21 +1,18 @@
-import { users } from '../db';
-import * as url from "url";
-import {IncomingMessage, ServerResponse} from "http";
-export default function deleteResponse(request:IncomingMessage, response:ServerResponse):void {
-  const urlRequest = url.parse(request.url, true);
-  const userId = urlRequest.query.userId;
-
-  const arrUser = users.map((item, i) => {
-    if (item.id == userId) {
-      users.splice(i, 1);
-    }
-  });
-  if (arrUser.length == users.length) {
-    console.log('404');
-    response.end('404');
+import { IncomingMessage, ServerResponse } from 'http';
+import { deleteUser } from '../service/delete.service';
+import { UrlWithParsedQuery } from 'url';
+import * as url from 'url';
+import { badRequest } from '../service/utils';
+export default function deleteResponse(
+  request: IncomingMessage,
+  response: ServerResponse,
+): void {
+  const urlRequest: UrlWithParsedQuery = url.parse(request.url, true);
+  const userIdCheck = 'userId' in urlRequest.query;
+  if (userIdCheck) {
+    return deleteUser(request, response);
   }
-  const res1 = JSON.stringify(arrUser);
-  response.statusCode = 204;
-
-  response.end(res1);
+  if (!userIdCheck) {
+    return badRequest(request, response, 400, 'Bad request');
+  }
 }
