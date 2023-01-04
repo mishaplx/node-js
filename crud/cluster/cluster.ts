@@ -9,7 +9,9 @@ import putResponse from '../controller/put.controller';
 import deleteResponse from '../controller/delete.controller';
 import { badRequest } from '../service/utils';
 import * as dotenv from 'dotenv';
-let postPlus = 1;
+const iObj = {
+  i: 0,
+};
 const numCPUs = cpus().length;
 if (cluster.isPrimary) {
   console.log(`Primary ${process.pid} is running`);
@@ -25,6 +27,9 @@ if (cluster.isPrimary) {
 } else {
   // Workers can share any TCP connection
   // In this case it is an HTTP server
+  const iObj = {
+    i: 0,
+  };
   const app = http.createServer(function (
     request: IncomingMessage,
     response: ServerResponse,
@@ -43,9 +48,12 @@ if (cluster.isPrimary) {
       badRequest(request, response, 404, 'Not found');
     }
   });
-  postPlus == postPlus++;
-  console.log(postPlus);
-  app.listen(dotenv.config().parsed.PORT);
+  iObj.i++;
+  console.log(iObj.i);
+  const port = dotenv.config().parsed.PORT_MULTI;
+
+  app.listen(port);
+  console.log(`app start in localhost:${port}`);
 
   console.log(`Worker ${process.pid} started`);
 }
