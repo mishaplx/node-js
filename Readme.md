@@ -17,17 +17,14 @@
 * Server should answer with status code 400 and corresponding message if userId is invalid (not uuid)
 * Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
 
-
 #### For Developer
 ```
 npm run start:dev
 ```
-
 #### For Production
 ```
 npm run start:prod
 ```
-
 #### Cluster
 ```
 npm run start:cluster
