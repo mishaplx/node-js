@@ -27,5 +27,5 @@ npm run start:prod
 ```
 #### Cluster
 ```
-npm run start:cluster
+npm run start:multi
 ```

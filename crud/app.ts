@@ -8,7 +8,7 @@ import getResponse from './controller/get.controller';
 import putResponse from './controller/put.controller';
 import deleteResponse from './controller/delete.controller';
 import { badRequest } from './service/utils';
-const app = http.createServer(function (
+export const app = http.createServer(function (
   request: IncomingMessage,
   response: ServerResponse,
 ): void {
